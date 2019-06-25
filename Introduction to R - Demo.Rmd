@@ -1,0 +1,181 @@
+---
+output: html_notebook
+---
+
+#### Introduction to R - 
+
+<br>
+
+1) Assigment Operators
+
+```{r}
+x <- "Hello World!"
+y = "Hello World!"
+"Hello World!" -> z
+print(x)
+print(y)
+print(z)
+```
+
+<br>
+
+2) Implicit Printing
+
+```{r}
+print(x)
+x
+```
+<br>
+3) Creating Variables
+
+```{r}
+l <- TRUE
+i <- 123L
+n <- 1.23
+c <- "ABC 123"
+d <- as.Date("2001-02-03")
+```
+<br>
+4) Displaying Variables
+
+```{r}
+l
+i
+n
+c
+d
+```
+<br>
+5) Creating a function
+
+```{r}
+f <- function(x) {x+1}
+```
+<br>
+6) Invoking a function
+
+```{r}
+f(2)
+```
+<br>
+7) Creating a vector
+
+```{r}
+v <- c(1, 2, 3)
+v
+```
+<br>
+8) Creating a sequence
+
+```{r}
+s <- 1:5
+s
+```
+<br>
+
+9) Creating a matrix
+
+```{r}
+m <- matrix(data = 1:6, nrow = 2, ncol = 3)
+m
+```
+<br>
+10) Creating an Array: They have dimension
+
+```{r}
+a <- array(data = 1:8,
+           dim = c(2, 2, 2))
+a
+```
+<br>
+11) Creating a list: Values of different datatypes
+
+```{r}
+l <- list(TRUE, 123L, 2.34, "abc")
+l
+```
+<br>
+12) Creating a factor: 
+
+```{r}
+categories <- c("Male", "Female", "Male", "Male")
+factor <- factor(categories)
+factor
+levels(factor)
+unclass(factor)
+```
+
+There's a special data type in R called a factor that stores categories of named values. This is similar to an enumeration in the C-like programming languages. Vectors store a list of categorical variables by assigning each unique category, called a level, as an integer value and storing the data as a vector of integers in memory, instead of storing the entire list of categorical values. Doing so saves a significant amount of space in memory and affords significantly greater performance for many operations. For example, if we have a vector of character strings containing the named values of Male, Female, Male, Male, Female, we can store these values using a factor. First we set a variable called factor, equal to the factor keyword given a vector of character strings. If we print this factor, we can see that it contains five values, Male, Female, Male, Male, Female, and two levels, that is Female and Male. If we use the levels command, we'll see a list of unique-name values or levels in alphabetical order. The order in which these named values occur is the order that maps to the backing integers. For example, Female maps to the integer 1, and Male maps to the integer 2. If we use the unclass command, we can see the underlying integer array that is 2 1 2 2 1 and the 2 levels, that is Female and Male that compose this factor. 
+
+
+14) Creating a Data Frame
+
+```{r}
+df <- data.frame(
+  Name = c("CAT", "DOG", "COW", "PIG"),
+  HowMany = c(5, 10, 15, 20),
+  IsPet = c(TRUE, TRUE, FALSE, FALSE)
+)
+df
+```
+
+A data frame is the most important data structure for working with collections of tabular data in R. It essentially represents a table of data, that is, it has a set of columns and a set of rows. Each column can contain a different data type, but all the data in a single column must be of the same data type. We create a data frame using the data frame keyword. For example, we can set a variable df equal to a new data frame containing a column called Name, populated with a vector of character string values, Cat, Dog, Cow, and Pig, and a second column called HowMany, containing a vector of integers, 5, 10, 15, and 20, and a third column called IsPet containing a vector of logical values TRUE, TRUE, FALSE, and FALSE. When we print our data frame, we get pretty much what we'd expect, a table containing three columns, that is, Name, HowMany, and IsPet, in four rows containing their respective values. Once we have our data stored in a data frame, we can query and manipulate these data in extremely powerful ways. We can index our data frame by row and column using the index operator. 
+
+```{r}
+# Indexing data frames by row and column
+df[1, 2]
+
+# Indexing data frames by row
+df[1, ]
+
+# Indexing data frames by column
+df[, 2]
+df[["HowMany"]]
+df$HowMany
+```
+
+For example, if we want to return the value contained in row 1 in column 2, we would type the following: As we can see, this returns the integer 5, which is the value contained in row 1 in column 2 of our data frame. In addition, we can omit the column argument and the index operation will return the values in the first row across all columns. Or, we can omit the row argument and the indexing operation returns all values contained in the second column. We can also index by columns using the column name with the double square brackets notation. Or, if there's a syntactic shortcut that allows us to use the dollar sign followed by the name of the column. All three of these examples return the same values, that is, all rows in the second column.
+
+```{r}
+# Subsetting Data Frames
+df[c(2, 4),]
+df[2:4, ]
+df[c(TRUE, FALSE, TRUE, FALSE),]
+df[df$IsPet == TRUE, ]
+df[df$HowMany > 10,]
+df[df$Name %in% c("CAT", "COW"),]
+```
+
+Subsetting allows us to slice and dice data in very flexible ways. First, we can pass a vector of integers indicating each row we want returned from our data frame into the rows argument of the index operator and it will return the specified rows. For example, passing in a vector containing the integers 2 and 4 will return rows 2 and 4. In addition, we can pass a sequence of integers, for example, rows 2 through 4 into the rows argument and it will return rows 2 through 4. We can also pass in a vector of logical values, for example, TRUE, FALSE, TRUE, and FALSE, indicating which rows we want returned or not, and it will return the corresponding rows. In this case, row 1 and row 3, since the first and third elements in the vector were set to TRUE. Although passing a vector of logical values by hand might seem like a trivial example, you can imagine how powerful this would be if the values in the vector were created programmatically, using an operation that returns true or false for each row in the database. For example, we can use the equality operator to return TRUE or FALSE for each row in the database matching a certain condition. As an example, we could specify that we want to return all rows where IsPet is TRUE, and we'll get the rows containing Cat and Dog. We can also subset using inequality operators. For example, we can query all rows where how many is greater than 10, which returns the rows containing Cow and Pig. We can also subset data tables using more advanced query expressions, like finding all rows matching a list of values. For example, we can find all rows where the animal's name is contained in the list Cat or Cow, and this will return just row 1 and row 3. And I should note that indexing and subsetting operations also apply to vectors, matrices, arrays, and lists, in additional to data frames. 
+<br>
+13) R is a vectorized language
+
+```{r}
+1 + 2
+c(1, 2, 3) + c(1, 2, 3)
+```
+<br>
+14) Named vs ordered arguments
+
+```{r}
+m <- matrix(data = 1:6, nrow = 2, ncol = 3)
+n <- matrix(1:6, 2, 3)
+m == n
+identical(m, n)
+```
+<br>
+15) Installing packages
+
+```{r}
+# INSTALL
+install.packages("dplyr")
+
+# LOAD
+library("dplyr")
+```
+<br>
+16) Viewing Help
+
+```{r}
+?data.frame
+```
