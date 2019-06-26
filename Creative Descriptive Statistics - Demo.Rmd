@@ -1,0 +1,78 @@
+---
+output: html_notebook
+---
+
+#### Creating Descriptive Statistics - Demo
+<br>
+
+1. How many cars of each type of transmission? <br>
+2. What does fuel economy look like? <br>
+3. How are cylinders and fuel economy related? <br>
+
+```{r}
+cars <- read.csv("Cars.csv")
+head(cars)
+```
+<br>
+**1. How many cars of each type of transmission?**
+
+```{r}
+# Create a frequency table
+table(cars$Transmission)
+```
+
+<br>
+**2. What does fuel economy look like? Miles per galon** <br>
+
+```{r}
+# Get the minimum value
+min(cars$Fuel.Economy)
+```
+
+```{r}
+# Get the maximum value
+max(cars$Fuel.Economy)
+```
+
+```{r}
+# Get the average value
+mean(cars$Fuel.Economy)
+```
+
+```{r}
+# Get the median value
+median(cars$Fuel.Economy)
+```
+
+```{r}
+# Get the quartiles
+quantile(cars$Fuel.Economy)
+```
+
+```{r}
+# Get the standard deviation
+sd(cars$Fuel.Economy)
+```
+
+```{r}
+# Get the total value
+sum(cars$Fuel.Economy)
+```
+<br>
+
+**3. How are cylinders and fuel economy related?** <br>
+
+```{r}
+# Get the correlation coefficient
+cor(
+    x = cars$Cylinders,
+    y = cars$Fuel.Economy)
+```
+
+```{r}
+# Summarize an entire table
+summary(cars)
+```
+
+As we can see, the correlation coefficient for these 2 variables is -0. 85, which is a relatively strong inverse correlation. In the event you'd like to summarize an entire table of values, we can use the summarize function and pass in a data frame as an argument. When we summarize a table, it provides us with a summary of each variable, based on the type of variable in each column. 
+

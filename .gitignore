@@ -49,4 +49,5 @@ vignettes/*.pdf
 # R package: bookdown caching files
 /*_files/
 
+.DS_Store
 # End of https://www.gitignore.io/api/r
