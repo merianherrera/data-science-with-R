@@ -1,0 +1,125 @@
+---
+output: html_notebook
+---
+
+#### Working with Data - Demo
+
+```{r}
+library("dplyr")
+```
+
+```{r}
+# Set the working directory
+setwd("C:\Users\mery-\Desktop\Development\DataScienceWithR")
+```
+
+```{r}
+# Read a tab-delimited data file
+
+cars <- read.table(
+  file = "Cars.txt",
+  header = TRUE,
+  sep = "\t",
+  quote = "\""
+)
+# Peek at the data
+head(cars)
+```
+
+```{r}
+# Select a subset of columns
+
+temp <- select(
+  .data = cars, 
+  Transmission,
+  Cylinders,
+  Fuel.Economy)
+
+# Inspect the results
+head(temp)
+```
+
+<br>
+We are going to filter tha data to include only the cars with automatic transmission.
+
+```{r}
+# Filter a subset of rows
+
+temp <- filter(
+  .data = temp,
+  Transmission == "Automatic"
+)
+# Inspect the results
+head(temp)
+```
+
+
+```{r}
+# Compute a new column
+temp <- mutate(
+  .data = temp,
+  Consumption = Fuel.Economy * 0.425
+)
+
+head(temp)
+```
+
+```{r}
+# Group by a column
+temp <- group_by(
+  .data = temp,
+  Cylinders
+)
+head(temp)
+```
+
+```{r}
+# Aggregate based on groups
+temp <- summarize(
+  .data = temp,
+  Avg.Consumption = mean(Consumption)
+)
+head(temp)
+```
+
+```{r}
+# Arrange the rows in descending order
+
+temp <- arrange(
+  .data = temp,
+  desc(Avg.Consumption)
+)
+
+head(temp)
+```
+
+```{r}
+# Convert to Data Frame
+efficiency <- as.data.frame(temp)
+
+# Inspect the results
+print(efficiency)
+```
+
+```{r}
+# Chain methods toguether
+efficiency <- cars %>%
+  select(Fuel.Economy, Cylinders, Transmission) %>%
+  filter(Transmission == "Automatic") %>%
+  mutate(Consumption = Fuel.Economy * 0.425) %>%
+  group_by(Cylinders) %>%
+  summarize(Avg.Consumption = mean(Consumption)) %>%
+  arrange(desc(Avg.Consumption)) %>%
+  as.data.frame()
+
+print(efficiency)
+```
+
+```{r}
+# Save the results to a CSV file
+write.csv(
+  x = efficiency,
+  file = "Fuel Efficiency.csv",
+  row.names = FALSE
+)
+```
