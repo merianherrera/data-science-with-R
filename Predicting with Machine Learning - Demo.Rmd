@@ -92,6 +92,7 @@ table(
 ```{r}
 # Load the caret package
 library(caret)
+library(e1071)
 
 # Evaluate the prediction results
 confusionMatrix(
