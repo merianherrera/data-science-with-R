@@ -247,31 +247,165 @@ $(document).ready(function () {
 <h3>Deploying to Production - Demo</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZXBsb3lpbmcgdG8gUHJvZHVjdGlvblxuIyBMb2FkIHNoaW55XG5saWJyYXJ5KHNoaW55KVxuIyBDcmVhdGUgYSBVSVxudWkgPC0gZmx1aWRQYWdlKFwiSGVsbG8gV29ybGQhXCIpXG4jIENyZWF0ZSBhIHNlcnZlclxuc2VydmVyIDwtIGZ1bmN0aW9uKGlucHV0LCBvdXRwdXQpIHt9XG4jIENyZWF0ZSBhIHNoaW55IGFwcFxuc2hpbnlBcHAoXG4gICAgdWkgPSB1aSxcbiAgICBzZXJ2ZXIgPSBzZXJ2ZXIpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBEZXBsb3lpbmcgdG8gUHJvZHVjdGlvblxuXG4jIExvYWQgc2hpbnlcbmxpYnJhcnkoc2hpbnkpXG5cbiMgQ3JlYXRlIGEgVUlcbnVpIDwtIGZsdWlkUGFnZShcIkhlbGxvIFdvcmxkIVwiKVxuXG4jIENyZWF0ZSBhIHNlcnZlclxuc2VydmVyIDwtIGZ1bmN0aW9uKGlucHV0LCBvdXRwdXQpIHt9XG5cbiMgQ3JlYXRlIGEgc2hpbnkgYXBwXG5zaGlueUFwcChcbiAgICB1aSA9IHVpLFxuICAgIHNlcnZlciA9IHNlcnZlcilcbmBgYCJ9 -->
 <pre class="r"><code># Deploying to Production
+
 # Load shiny
 library(shiny)
+
 # Create a UI
 ui &lt;- fluidPage(&quot;Hello World!&quot;)
+
 # Create a server
 server &lt;- function(input, output) {}
+
 # Create a shiny app
 shinyApp(
     ui = ui,
     server = server)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiXG5MaXN0ZW5pbmcgb24gaHR0cDovLzEyNy4wLjAuMTozNjU0XG4ifQ== -->
-<pre><code>
-Listening on http://127.0.0.1:3654</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb2FkIHNoaW55XG5saWJyYXJ5KHNoaW55KVxuXG4jIENyZWF0ZSBhIFVJIHdpdGggSS9PIGNvbnRyb2xzXG51aSA8LSBmbHVpZFBhZ2UoXG4gICAgdGl0bGVQYW5lbChcIklucHV0IGFuZCBPdXRwdXRcIiksXG4gICAgc2lkZWJhckxheW91dChcbiAgICAgICAgc2lkZWJhclBhbmVsKFxuICAgICAgICAgICAgc2xpZGVySW5wdXQoXG4gICAgICAgICAgICAgICAgaW5wdXRJZCA9IFwibnVtXCIsXG4gICAgICAgICAgICAgICAgbGFiZWwgPSBcIkNob29zZSBhIE51bWJlclwiLFxuICAgICAgICAgICAgICAgIG1pbiA9IDAsXG4gICAgICAgICAgICAgICAgbWF4ID0gMTAwLFxuICAgICAgICAgICAgICAgIHZhbHVlID0gMjUpKSxcbiAgICAgICAgbWFpblBhbmVsKFxuICAgICAgICAgICAgdGV4dE91dHB1dChcbiAgICAgICAgICAgICAgICBvdXRwdXRJZCA9IFwidGV4dFwiKSkpKVxuXG4jIENyZWF0ZSBhIHNlcnZlciB0aGFuIG1hcHMgaW5wdXQgdG8gb3V0cHV0XG5zZXJ2ZXIgPC0gZnVuY3Rpb24oaW5wdXQsIG91dHB1dCkge1xuICAgIG91dHB1dCR0ZXh0IDwtIHJlbmRlclRleHQoe1xuICAgICAgICBwYXN0ZShcIllvdSBzZWxlY3RlZCBcIiwgaW5wdXQkbnVtICl9KVxufVxuXG4jIENyZWF0ZSBhIHNoaW55IGFwcFxuc2hpbnlBcHAoXG4gICAgdWkgPSB1aSxcbiAgICBzZXJ2ZXIgPSBzZXJ2ZXIpXG5gYGAifQ== -->
+<pre class="r"><code># Load shiny
+library(shiny)
+
+# Create a UI with I/O controls
+ui &lt;- fluidPage(
+    titlePanel(&quot;Input and Output&quot;),
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput(
+                inputId = &quot;num&quot;,
+                label = &quot;Choose a Number&quot;,
+                min = 0,
+                max = 100,
+                value = 25)),
+        mainPanel(
+            textOutput(
+                outputId = &quot;text&quot;))))
+
+# Create a server than maps input to output
+server &lt;- function(input, output) {
+    output$text &lt;- renderText({
+        paste(&quot;You selected &quot;, input$num )})
+}
+
+# Create a shiny app
+shinyApp(
+    ui = ui,
+    server = server)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBMb2FkIHNoaW55XG5saWJyYXJ5KHNoaW55KVxuIyBMb2FkIGRlY2lzaW9uIHRyZWUgcGFja2FnZVxubGlicmFyeSh0cmVlKVxuXG4jIExvYWQgdHJhaW5pbmcgZGF0YVxubG9hZChcIlRyYWluLlJEYXRhXCIpXG5cbiMgTG9hZCB0cmVlIG1vZGVsXG5sb2FkKFwiVHJlZS5SRGF0YVwiKVxuXG4jIExvYWQgY29sb3IgYnJld2VyIGxpYnJhcnlcbmxpYnJhcnkoUkNvbG9yQnJld2VyKVxuXG4jIENyZWF0ZSBhIGNvbG9yIHBhbGV0dGVcbnBhbGV0dGUgPC0gYnJld2VyLnBhbCgzLCBcIlNldDJcIilcblxuIyBDcmVhdGUgdXNlciBpbnRlcmZhY2UgY29kZVxudWkgPC0gZmx1aWRQYWdlKFxuICAgIHRpdGxlUGFuZWwoXCJJcmlzIFNwZWNpZXMgUHJlZGljdG9yXCIpLFxuICAgIHNpZGViYXJMYXlvdXQoXG4gICAgICAgIHNpZGViYXJQYW5lbChcbiAgICAgICAgICAgIHNsaWRlcklucHV0KFxuICAgICAgICAgICAgICAgIGlucHV0SWQgPSBcInBldGFsLmxlbmd0aFwiLFxuICAgICAgICAgICAgICAgIGxhYmVsID0gXCJQZXRhbCBMZW5ndGggKGNtKVwiLFxuICAgICAgICAgICAgICAgIG1pbiA9IDEsXG4gICAgICAgICAgICAgICAgbWF4ID0gNyxcbiAgICAgICAgICAgICAgICB2YWx1ZSA9IDQpLFxuICAgICAgICAgICAgc2xpZGVySW5wdXQoXG4gICAgICAgICAgICAgICAgaW5wdXRJZCA9IFwicGV0YWwud2lkdGhcIixcbiAgICAgICAgICAgICAgICBsYWJlbCA9IFwiUGV0YWwgV2lkdGggKGNtKVwiLFxuICAgICAgICAgICAgICAgIG1pbiA9IDAuMCxcbiAgICAgICAgICAgICAgICBtYXggPSAyLjUsXG4gICAgICAgICAgICAgICAgc3RlcCA9IDAuNSxcbiAgICAgICAgICAgICAgICB2YWx1ZSA9IDEuNSkpLFxuICAgICAgICBtYWluUGFuZWwoXG4gICAgICAgICAgICB0ZXh0T3V0cHV0KFxuICAgICAgICAgICAgICAgIG91dHB1dElkID0gXCJ0ZXh0XCIpLFxuICAgICAgICAgICAgcGxvdE91dHB1dChcbiAgICAgICAgICAgICAgICBvdXRwdXRJZCA9IFwicGxvdFwiKSkpKVxuXG4jIENyZWF0ZSBzZXJ2ZXIgY29kZVxuc2VydmVyIDwtIGZ1bmN0aW9uKGlucHV0LCBvdXRwdXQpIHtcbiAgICBvdXRwdXQkdGV4dCA9IHJlbmRlclRleHQoe1xuICAgICAgICBcbiAgICAgICAgIyBDcmVhdGUgcHJlZGljdG9yc1xuICAgICAgICBwcmVkaWN0b3JzIDwtIGRhdGEuZnJhbWUoXG4gICAgICAgICAgICBQZXRhbC5MZW5ndGggPSBpbnB1dCRwZXRhbC5sZW5ndGgsXG4gICAgICAgICAgICBQZXRhbC5XaWR0aCA9IGlucHV0JHBldGFsLndpZHRoLFxuICAgICAgICAgICAgU2VwYWwuTGVuZ3RoID0gMCxcbiAgICAgICAgICAgIFNlcGFsLldpZHRoID0gMClcbiAgICAgICAgXG4gICAgICAgICMgTWFrZSBwcmVkaWN0aW9uXG4gICAgICAgIHByZWRpY3Rpb24gPSBwcmVkaWN0KFxuICAgICAgICAgICAgb2JqZWN0ID0gbW9kZWwsXG4gICAgICAgICAgICBuZXdkYXRhID0gcHJlZGljdG9ycyxcbiAgICAgICAgICAgIHR5cGUgPSBcImNsYXNzXCIpXG4gICAgICAgIFxuICAgICAgICAjIENyZWF0ZSBwcmVkaWN0aW9uIHRleHRcbiAgICAgICAgcGFzdGUoXG4gICAgICAgICAgICBcIlRoZSBwcmVkaWN0ZWQgc3BlY2llcyBpcyBcIixcbiAgICAgICAgICAgIGFzLmNoYXJhY3RlcihwcmVkaWN0aW9uKSlcbiAgICB9KVxuICAgIFxuICAgIG91dHB1dCRwbG90ID0gcmVuZGVyUGxvdCh7XG4gICAgICAgIFxuICAgICAgICAjIENyZWF0ZSBhIHNjYXR0ZXJwbG90IGNvbG9yZWQgYnkgc3BlY2llc1xuICAgICAgICBwbG90KFxuICAgICAgICAgICAgeCA9IGlyaXMkUGV0YWwuTGVuZ3RoLCBcbiAgICAgICAgICAgIHkgPSBpcmlzJFBldGFsLldpZHRoLFxuICAgICAgICAgICAgcGNoID0gMTksXG4gICAgICAgICAgICBjb2wgPSBwYWxldHRlW2FzLm51bWVyaWMoaXJpcyRTcGVjaWVzKV0sXG4gICAgICAgICAgICBtYWluID0gXCJJcmlzIFBldGFsIExlbmd0aCB2cy4gV2lkdGhcIixcbiAgICAgICAgICAgIHhsYWIgPSBcIlBldGFsIExlbmd0aCAoY20pXCIsXG4gICAgICAgICAgICB5bGFiID0gXCJQZXRhbCBXaWR0aCAoY20pXCIpXG4gICAgICAgIFxuICAgICAgICAjIFBsb3QgdGhlIGRlY2lzaW9uIGJvdW5kYXJpZXNcbiAgICAgICAgcGFydGl0aW9uLnRyZWUoXG4gICAgICAgICAgICBtb2RlbCxcbiAgICAgICAgICAgIGxhYmVsID0gXCJTcGVjaWVzXCIsXG4gICAgICAgICAgICBhZGQgPSBUUlVFKVxuICAgICAgICBcbiAgICAgICAgIyBEcmF3IHByZWRpY3RvciBvbiBwbG90XG4gICAgICAgIHBvaW50cyhcbiAgICAgICAgICAgIHggPSBpbnB1dCRwZXRhbC5sZW5ndGgsXG4gICAgICAgICAgICB5ID0gaW5wdXQkcGV0YWwud2lkdGgsXG4gICAgICAgICAgICBjb2wgPSBcInJlZFwiLFxuICAgICAgICAgICAgcGNoID0gNCxcbiAgICAgICAgICAgIGNleCA9IDIsXG4gICAgICAgICAgICBsd2QgPSAyKVxuICAgIH0pXG59XG5cbiMgQ3JlYXRlIGEgc2hpbnkgYXBwXG5zaGlueUFwcChcbiAgICB1aSA9IHVpLFxuICAgIHNlcnZlciA9IHNlcnZlcilcblxuYGBgIn0= -->
+<pre class="r"><code># Load shiny
+library(shiny)
+# Load decision tree package
+library(tree)
+
+# Load training data
+load(&quot;Train.RData&quot;)
+
+# Load tree model
+load(&quot;Tree.RData&quot;)
+
+# Load color brewer library
+library(RColorBrewer)
+
+# Create a color palette
+palette &lt;- brewer.pal(3, &quot;Set2&quot;)
+
+# Create user interface code
+ui &lt;- fluidPage(
+    titlePanel(&quot;Iris Species Predictor&quot;),
+    sidebarLayout(
+        sidebarPanel(
+            sliderInput(
+                inputId = &quot;petal.length&quot;,
+                label = &quot;Petal Length (cm)&quot;,
+                min = 1,
+                max = 7,
+                value = 4),
+            sliderInput(
+                inputId = &quot;petal.width&quot;,
+                label = &quot;Petal Width (cm)&quot;,
+                min = 0.0,
+                max = 2.5,
+                step = 0.5,
+                value = 1.5)),
+        mainPanel(
+            textOutput(
+                outputId = &quot;text&quot;),
+            plotOutput(
+                outputId = &quot;plot&quot;))))
+
+# Create server code
+server &lt;- function(input, output) {
+    output$text = renderText({
+        
+        # Create predictors
+        predictors &lt;- data.frame(
+            Petal.Length = input$petal.length,
+            Petal.Width = input$petal.width,
+            Sepal.Length = 0,
+            Sepal.Width = 0)
+        
+        # Make prediction
+        prediction = predict(
+            object = model,
+            newdata = predictors,
+            type = &quot;class&quot;)
+        
+        # Create prediction text
+        paste(
+            &quot;The predicted species is &quot;,
+            as.character(prediction))
+    })
+    
+    output$plot = renderPlot({
+        
+        # Create a scatterplot colored by species
+        plot(
+            x = iris$Petal.Length, 
+            y = iris$Petal.Width,
+            pch = 19,
+            col = palette[as.numeric(iris$Species)],
+            main = &quot;Iris Petal Length vs. Width&quot;,
+            xlab = &quot;Petal Length (cm)&quot;,
+            ylab = &quot;Petal Width (cm)&quot;)
+        
+        # Plot the decision boundaries
+        partition.tree(
+            model,
+            label = &quot;Species&quot;,
+            add = TRUE)
+        
+        # Draw predictor on plot
+        points(
+            x = input$petal.length,
+            y = input$petal.width,
+            col = &quot;red&quot;,
+            pch = 4,
+            cex = 2,
+            lwd = 2)
+    })
+}
+
+# Create a shiny app
+shinyApp(
+    ui = ui,
+    server = server)
+</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIyBEZXBsb3lpbmcgdG8gUHJvZHVjdGlvbiAtIERlbW8KCmBgYHtyfQojIERlcGxveWluZyB0byBQcm9kdWN0aW9uCgojIExvYWQgc2hpbnkKbGlicmFyeShzaGlueSkKCiMgQ3JlYXRlIGEgVUkKdWkgPC0gZmx1aWRQYWdlKCJIZWxsbyBXb3JsZCEiKQoKIyBDcmVhdGUgYSBzZXJ2ZXIKc2VydmVyIDwtIGZ1bmN0aW9uKGlucHV0LCBvdXRwdXQpIHt9CgojIENyZWF0ZSBhIHNoaW55IGFwcApzaGlueUFwcCgKICAgIHVpID0gdWksCiAgICBzZXJ2ZXIgPSBzZXJ2ZXIpCmBgYAoKYGBge3J9CiMgQ3JlYXRlIGEgVUkgd2l0aCBJL08gY29udHJvbHMKdWkgPC0gZmx1aWRQYWdlKAogICAgdGl0bGVQYW5lbCgiSW5wdXQgYW5kIE91dHB1dCIpLAogICAgc2lkZWJhckxheW91dCgKICAgICAgICBzaWRlYmFyUGFuZWwoCiAgICAgICAgICAgIHNsaWRlcklucHV0KAogICAgICAgICAgICAgICAgaW5wdXRJZCA9ICJudW0iLAogICAgICAgICAgICAgICAgbGFiZWwgPSAiQ2hvb3NlIGEgTnVtYmVyIiwKICAgICAgICAgICAgICAgIG1pbiA9IDAsCiAgICAgICAgICAgICAgICBtYXggPSAxMDAsCiAgICAgICAgICAgICAgICB2YWx1ZSA9IDI1KSksCiAgICAgICAgbWFpblBhbmVsKAogICAgICAgICAgICB0ZXh0T3V0cHV0KAogICAgICAgICAgICAgICAgb3V0cHV0SWQgPSAidGV4dCIpKSkpCgojIENyZWF0ZSBhIHNlcnZlciB0aGFuIG1hcHMgaW5wdXQgdG8gb3V0cHV0CnNlcnZlciA8LSBmdW5jdGlvbihpbnB1dCwgb3V0cHV0KSB7CiAgICBvdXRwdXQkdGV4dCA8LSByZW5kZXJUZXh0KHsKICAgICAgICBwYXN0ZSgiWW91IHNlbGVjdGVkICIsIGlucHV0JG51bSApfSkKfQoKIyBDcmVhdGUgYSBzaGlueSBhcHAKc2hpbnlBcHAoCiAgICB1aSA9IHVpLAogICAgc2VydmVyID0gc2VydmVyKQoKIyBMb2FkIGRlY2lzaW9uIHRyZWUgcGFja2FnZQpsaWJyYXJ5KHRyZWUpCgojIFNldCB3b3JraW5nIGRpcmVjdG9yeQpzZXR3ZCgiQzovUGx1cmFsc2lnaHQiKQoKIyBMb2FkIHRyYWluaW5nIGRhdGEKbG9hZCgiVHJhaW4uUkRhdGEiKQoKIyBMb2FkIHRyZWUgbW9kZWwKbG9hZCgiVHJlZS5SRGF0YSIpCgojIExvYWQgY29sb3IgYnJld2VyIGxpYnJhcnkKbGlicmFyeShSQ29sb3JCcmV3ZXIpCgojIENyZWF0ZSBhIGNvbG9yIHBhbGV0dGUKcGFsZXR0ZSA8LSBicmV3ZXIucGFsKDMsICJTZXQyIikKCiMgQ3JlYXRlIHVzZXIgaW50ZXJmYWNlIGNvZGUKdWkgPC0gZmx1aWRQYWdlKAogICAgdGl0bGVQYW5lbCgiSXJpcyBTcGVjaWVzIFByZWRpY3RvciIpLAogICAgc2lkZWJhckxheW91dCgKICAgICAgICBzaWRlYmFyUGFuZWwoCiAgICAgICAgICAgIHNsaWRlcklucHV0KAogICAgICAgICAgICAgICAgaW5wdXRJZCA9ICJwZXRhbC5sZW5ndGgiLAogICAgICAgICAgICAgICAgbGFiZWwgPSAiUGV0YWwgTGVuZ3RoIChjbSkiLAogICAgICAgICAgICAgICAgbWluID0gMSwKICAgICAgICAgICAgICAgIG1heCA9IDcsCiAgICAgICAgICAgICAgICB2YWx1ZSA9IDQpLAogICAgICAgICAgICBzbGlkZXJJbnB1dCgKICAgICAgICAgICAgICAgIGlucHV0SWQgPSAicGV0YWwud2lkdGgiLAogICAgICAgICAgICAgICAgbGFiZWwgPSAiUGV0YWwgV2lkdGggKGNtKSIsCiAgICAgICAgICAgICAgICBtaW4gPSAwLjAsCiAgICAgICAgICAgICAgICBtYXggPSAyLjUsCiAgICAgICAgICAgICAgICBzdGVwID0gMC41LAogICAgICAgICAgICAgICAgdmFsdWUgPSAxLjUpKSwKICAgICAgICBtYWluUGFuZWwoCiAgICAgICAgICAgIHRleHRPdXRwdXQoCiAgICAgICAgICAgICAgICBvdXRwdXRJZCA9ICJ0ZXh0IiksCiAgICAgICAgICAgIHBsb3RPdXRwdXQoCiAgICAgICAgICAgICAgICBvdXRwdXRJZCA9ICJwbG90IikpKSkKCiMgQ3JlYXRlIHNlcnZlciBjb2RlCnNlcnZlciA8LSBmdW5jdGlvbihpbnB1dCwgb3V0cHV0KSB7CiAgICBvdXRwdXQkdGV4dCA9IHJlbmRlclRleHQoewogICAgICAgIAogICAgICAgICMgQ3JlYXRlIHByZWRpY3RvcnMKICAgICAgICBwcmVkaWN0b3JzIDwtIGRhdGEuZnJhbWUoCiAgICAgICAgICAgIFBldGFsLkxlbmd0aCA9IGlucHV0JHBldGFsLmxlbmd0aCwKICAgICAgICAgICAgUGV0YWwuV2lkdGggPSBpbnB1dCRwZXRhbC53aWR0aCwKICAgICAgICAgICAgU2VwYWwuTGVuZ3RoID0gMCwKICAgICAgICAgICAgU2VwYWwuV2lkdGggPSAwKQogICAgICAgIAogICAgICAgICMgTWFrZSBwcmVkaWN0aW9uCiAgICAgICAgcHJlZGljdGlvbiA9IHByZWRpY3QoCiAgICAgICAgICAgIG9iamVjdCA9IG1vZGVsLAogICAgICAgICAgICBuZXdkYXRhID0gcHJlZGljdG9ycywKICAgICAgICAgICAgdHlwZSA9ICJjbGFzcyIpCiAgICAgICAgCiAgICAgICAgIyBDcmVhdGUgcHJlZGljdGlvbiB0ZXh0CiAgICAgICAgcGFzdGUoCiAgICAgICAgICAgICJUaGUgcHJlZGljdGVkIHNwZWNpZXMgaXMgIiwKICAgICAgICAgICAgYXMuY2hhcmFjdGVyKHByZWRpY3Rpb24pKQogICAgfSkKICAgIAogICAgb3V0cHV0JHBsb3QgPSByZW5kZXJQbG90KHsKICAgICAgICAKICAgICAgICAjIENyZWF0ZSBhIHNjYXR0ZXJwbG90IGNvbG9yZWQgYnkgc3BlY2llcwogICAgICAgIHBsb3QoCiAgICAgICAgICAgIHggPSBpcmlzJFBldGFsLkxlbmd0aCwgCiAgICAgICAgICAgIHkgPSBpcmlzJFBldGFsLldpZHRoLAogICAgICAgICAgICBwY2ggPSAxOSwKICAgICAgICAgICAgY29sID0gcGFsZXR0ZVthcy5udW1lcmljKGlyaXMkU3BlY2llcyldLAogICAgICAgICAgICBtYWluID0gIklyaXMgUGV0YWwgTGVuZ3RoIHZzLiBXaWR0aCIsCiAgICAgICAgICAgIHhsYWIgPSAiUGV0YWwgTGVuZ3RoIChjbSkiLAogICAgICAgICAgICB5bGFiID0gIlBldGFsIFdpZHRoIChjbSkiKQogICAgICAgIAogICAgICAgICMgUGxvdCB0aGUgZGVjaXNpb24gYm91bmRhcmllcwogICAgICAgIHBhcnRpdGlvbi50cmVlKAogICAgICAgICAgICBtb2RlbCwKICAgICAgICAgICAgbGFiZWwgPSAiU3BlY2llcyIsCiAgICAgICAgICAgIGFkZCA9IFRSVUUpCiAgICAgICAgCiAgICAgICAgIyBEcmF3IHByZWRpY3RvciBvbiBwbG90CiAgICAgICAgcG9pbnRzKAogICAgICAgICAgICB4ID0gaW5wdXQkcGV0YWwubGVuZ3RoLAogICAgICAgICAgICB5ID0gaW5wdXQkcGV0YWwud2lkdGgsCiAgICAgICAgICAgIGNvbCA9ICJyZWQiLAogICAgICAgICAgICBwY2ggPSA0LAogICAgICAgICAgICBjZXggPSAyLAogICAgICAgICAgICBsd2QgPSAyKQogICAgfSkKfQoKIyBDcmVhdGUgYSBzaGlueSBhcHAKc2hpbnlBcHAoCiAgICB1aSA9IHVpLAogICAgc2VydmVyID0gc2VydmVyKQoKYGBgCg==</div>
+<div id="rmd-source-code">LS0tCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMjIyBEZXBsb3lpbmcgdG8gUHJvZHVjdGlvbiAtIERlbW8KCmBgYHtyfQojIERlcGxveWluZyB0byBQcm9kdWN0aW9uCgojIExvYWQgc2hpbnkKbGlicmFyeShzaGlueSkKCiMgQ3JlYXRlIGEgVUkKdWkgPC0gZmx1aWRQYWdlKCJIZWxsbyBXb3JsZCEiKQoKIyBDcmVhdGUgYSBzZXJ2ZXIKc2VydmVyIDwtIGZ1bmN0aW9uKGlucHV0LCBvdXRwdXQpIHt9CgojIENyZWF0ZSBhIHNoaW55IGFwcApzaGlueUFwcCgKICAgIHVpID0gdWksCiAgICBzZXJ2ZXIgPSBzZXJ2ZXIpCmBgYAoKYGBge3J9CiMgTG9hZCBzaGlueQpsaWJyYXJ5KHNoaW55KQoKIyBDcmVhdGUgYSBVSSB3aXRoIEkvTyBjb250cm9scwp1aSA8LSBmbHVpZFBhZ2UoCiAgICB0aXRsZVBhbmVsKCJJbnB1dCBhbmQgT3V0cHV0IiksCiAgICBzaWRlYmFyTGF5b3V0KAogICAgICAgIHNpZGViYXJQYW5lbCgKICAgICAgICAgICAgc2xpZGVySW5wdXQoCiAgICAgICAgICAgICAgICBpbnB1dElkID0gIm51bSIsCiAgICAgICAgICAgICAgICBsYWJlbCA9ICJDaG9vc2UgYSBOdW1iZXIiLAogICAgICAgICAgICAgICAgbWluID0gMCwKICAgICAgICAgICAgICAgIG1heCA9IDEwMCwKICAgICAgICAgICAgICAgIHZhbHVlID0gMjUpKSwKICAgICAgICBtYWluUGFuZWwoCiAgICAgICAgICAgIHRleHRPdXRwdXQoCiAgICAgICAgICAgICAgICBvdXRwdXRJZCA9ICJ0ZXh0IikpKSkKCiMgQ3JlYXRlIGEgc2VydmVyIHRoYW4gbWFwcyBpbnB1dCB0byBvdXRwdXQKc2VydmVyIDwtIGZ1bmN0aW9uKGlucHV0LCBvdXRwdXQpIHsKICAgIG91dHB1dCR0ZXh0IDwtIHJlbmRlclRleHQoewogICAgICAgIHBhc3RlKCJZb3Ugc2VsZWN0ZWQgIiwgaW5wdXQkbnVtICl9KQp9CgojIENyZWF0ZSBhIHNoaW55IGFwcApzaGlueUFwcCgKICAgIHVpID0gdWksCiAgICBzZXJ2ZXIgPSBzZXJ2ZXIpCmBgYAoKYGBge3J9CiMgTG9hZCBzaGlueQpsaWJyYXJ5KHNoaW55KQojIExvYWQgZGVjaXNpb24gdHJlZSBwYWNrYWdlCmxpYnJhcnkodHJlZSkKCiMgTG9hZCB0cmFpbmluZyBkYXRhCmxvYWQoIlRyYWluLlJEYXRhIikKCiMgTG9hZCB0cmVlIG1vZGVsCmxvYWQoIlRyZWUuUkRhdGEiKQoKIyBMb2FkIGNvbG9yIGJyZXdlciBsaWJyYXJ5CmxpYnJhcnkoUkNvbG9yQnJld2VyKQoKIyBDcmVhdGUgYSBjb2xvciBwYWxldHRlCnBhbGV0dGUgPC0gYnJld2VyLnBhbCgzLCAiU2V0MiIpCgojIENyZWF0ZSB1c2VyIGludGVyZmFjZSBjb2RlCnVpIDwtIGZsdWlkUGFnZSgKICAgIHRpdGxlUGFuZWwoIklyaXMgU3BlY2llcyBQcmVkaWN0b3IiKSwKICAgIHNpZGViYXJMYXlvdXQoCiAgICAgICAgc2lkZWJhclBhbmVsKAogICAgICAgICAgICBzbGlkZXJJbnB1dCgKICAgICAgICAgICAgICAgIGlucHV0SWQgPSAicGV0YWwubGVuZ3RoIiwKICAgICAgICAgICAgICAgIGxhYmVsID0gIlBldGFsIExlbmd0aCAoY20pIiwKICAgICAgICAgICAgICAgIG1pbiA9IDEsCiAgICAgICAgICAgICAgICBtYXggPSA3LAogICAgICAgICAgICAgICAgdmFsdWUgPSA0KSwKICAgICAgICAgICAgc2xpZGVySW5wdXQoCiAgICAgICAgICAgICAgICBpbnB1dElkID0gInBldGFsLndpZHRoIiwKICAgICAgICAgICAgICAgIGxhYmVsID0gIlBldGFsIFdpZHRoIChjbSkiLAogICAgICAgICAgICAgICAgbWluID0gMC4wLAogICAgICAgICAgICAgICAgbWF4ID0gMi41LAogICAgICAgICAgICAgICAgc3RlcCA9IDAuNSwKICAgICAgICAgICAgICAgIHZhbHVlID0gMS41KSksCiAgICAgICAgbWFpblBhbmVsKAogICAgICAgICAgICB0ZXh0T3V0cHV0KAogICAgICAgICAgICAgICAgb3V0cHV0SWQgPSAidGV4dCIpLAogICAgICAgICAgICBwbG90T3V0cHV0KAogICAgICAgICAgICAgICAgb3V0cHV0SWQgPSAicGxvdCIpKSkpCgojIENyZWF0ZSBzZXJ2ZXIgY29kZQpzZXJ2ZXIgPC0gZnVuY3Rpb24oaW5wdXQsIG91dHB1dCkgewogICAgb3V0cHV0JHRleHQgPSByZW5kZXJUZXh0KHsKICAgICAgICAKICAgICAgICAjIENyZWF0ZSBwcmVkaWN0b3JzCiAgICAgICAgcHJlZGljdG9ycyA8LSBkYXRhLmZyYW1lKAogICAgICAgICAgICBQZXRhbC5MZW5ndGggPSBpbnB1dCRwZXRhbC5sZW5ndGgsCiAgICAgICAgICAgIFBldGFsLldpZHRoID0gaW5wdXQkcGV0YWwud2lkdGgsCiAgICAgICAgICAgIFNlcGFsLkxlbmd0aCA9IDAsCiAgICAgICAgICAgIFNlcGFsLldpZHRoID0gMCkKICAgICAgICAKICAgICAgICAjIE1ha2UgcHJlZGljdGlvbgogICAgICAgIHByZWRpY3Rpb24gPSBwcmVkaWN0KAogICAgICAgICAgICBvYmplY3QgPSBtb2RlbCwKICAgICAgICAgICAgbmV3ZGF0YSA9IHByZWRpY3RvcnMsCiAgICAgICAgICAgIHR5cGUgPSAiY2xhc3MiKQogICAgICAgIAogICAgICAgICMgQ3JlYXRlIHByZWRpY3Rpb24gdGV4dAogICAgICAgIHBhc3RlKAogICAgICAgICAgICAiVGhlIHByZWRpY3RlZCBzcGVjaWVzIGlzICIsCiAgICAgICAgICAgIGFzLmNoYXJhY3RlcihwcmVkaWN0aW9uKSkKICAgIH0pCiAgICAKICAgIG91dHB1dCRwbG90ID0gcmVuZGVyUGxvdCh7CiAgICAgICAgCiAgICAgICAgIyBDcmVhdGUgYSBzY2F0dGVycGxvdCBjb2xvcmVkIGJ5IHNwZWNpZXMKICAgICAgICBwbG90KAogICAgICAgICAgICB4ID0gaXJpcyRQZXRhbC5MZW5ndGgsIAogICAgICAgICAgICB5ID0gaXJpcyRQZXRhbC5XaWR0aCwKICAgICAgICAgICAgcGNoID0gMTksCiAgICAgICAgICAgIGNvbCA9IHBhbGV0dGVbYXMubnVtZXJpYyhpcmlzJFNwZWNpZXMpXSwKICAgICAgICAgICAgbWFpbiA9ICJJcmlzIFBldGFsIExlbmd0aCB2cy4gV2lkdGgiLAogICAgICAgICAgICB4bGFiID0gIlBldGFsIExlbmd0aCAoY20pIiwKICAgICAgICAgICAgeWxhYiA9ICJQZXRhbCBXaWR0aCAoY20pIikKICAgICAgICAKICAgICAgICAjIFBsb3QgdGhlIGRlY2lzaW9uIGJvdW5kYXJpZXMKICAgICAgICBwYXJ0aXRpb24udHJlZSgKICAgICAgICAgICAgbW9kZWwsCiAgICAgICAgICAgIGxhYmVsID0gIlNwZWNpZXMiLAogICAgICAgICAgICBhZGQgPSBUUlVFKQogICAgICAgIAogICAgICAgICMgRHJhdyBwcmVkaWN0b3Igb24gcGxvdAogICAgICAgIHBvaW50cygKICAgICAgICAgICAgeCA9IGlucHV0JHBldGFsLmxlbmd0aCwKICAgICAgICAgICAgeSA9IGlucHV0JHBldGFsLndpZHRoLAogICAgICAgICAgICBjb2wgPSAicmVkIiwKICAgICAgICAgICAgcGNoID0gNCwKICAgICAgICAgICAgY2V4ID0gMiwKICAgICAgICAgICAgbHdkID0gMikKICAgIH0pCn0KCiMgQ3JlYXRlIGEgc2hpbnkgYXBwCnNoaW55QXBwKAogICAgdWkgPSB1aSwKICAgIHNlcnZlciA9IHNlcnZlcikKCmBgYAo=</div>
 
 
 
